@@ -1,14 +1,17 @@
+import { Link } from "@tanstack/react-router";
 import MenuDrawer from "./MenuDrawer";
 
 const Header = () => {
   return (
     <header className="p-6 flex items-center" aria-label="Header">
-      <img
-        src="/images/app_logo_header.svg"
-        alt="Logo"
-        className="w-8 h-8 mr-2"
-      />
-      <h1 className="text-xl font-medium font-afacad">Edu Assist AI</h1>
+      <Link to="/" className="flex items-center">
+        <img
+          src="/images/app_logo_header.svg"
+          alt="Logo"
+          className="w-8 h-8 mr-2"
+        />
+        <h1 className="text-xl font-medium font-afacad">Edu Assist AI</h1>
+      </Link>
       <MenuDrawer
         trigger={
           <button className="ml-auto" aria-label="Menu">
