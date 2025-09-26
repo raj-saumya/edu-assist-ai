@@ -1,0 +1,31 @@
+@import "keen-slider/keen-slider.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  color-scheme: light;
+}
+
+html {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    color-scheme: light !important;
+  }
+
+  html {
+    color-scheme: light !important;
+  }
+}
+
+.grid-bg-effect {
+  background-image:
+    linear-gradient(90deg, #f6f6f696 1px, #0000 1px),
+    linear-gradient(#f6f6f6c1 1px, #0000 1px);
+  background-size: 16px 16px;
+  background-color: #fff;
+}
