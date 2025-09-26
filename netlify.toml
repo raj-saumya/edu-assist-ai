@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = ".netlify/build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-functions"
+
+[functions]
+  directory = ".netlify/functions"
