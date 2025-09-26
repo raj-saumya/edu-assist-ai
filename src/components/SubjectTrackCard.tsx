@@ -23,7 +23,7 @@ const SubjectTrackCard = (props: SubjectTrackCardType & { index: number }) => {
 
   return (
     <div
-      className={cn("relative flex flex-col rounded-lg p-3 w-full h-full")}
+      className={cn("relative flex flex-col rounded-lg p-3 w-full h-full min-w-36")}
       style={{ backgroundColor: COLORS[index % COLORS.length] }}
     >
       <span className="text-base font-afacad mb-6">

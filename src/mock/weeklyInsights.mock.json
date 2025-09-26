@@ -1,0 +1,19 @@
+{
+  "weeklyInsights": [
+    {
+      "subject": "Mathematics",
+      "name": "Aarav",
+      "insights": "Showed 25% improvement in quadratic equations this week"
+    },
+    {
+      "subject": "Mathematics",
+      "name": "Aarav",
+      "insights": "Struggling with multiplication tables - needs extra practice"
+    },
+    {
+      "subject": "Science",
+      "name": "Priya",
+      "insights": "Completed all chapters in Photosynthesis with 90+ accuracy"
+    }
+  ]
+}
