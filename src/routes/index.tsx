@@ -5,9 +5,11 @@ import LoginDrawer from "~/components/LoginDrawer";
 
 export const Route = createFileRoute("/")({
   component: Home,
-  validateSearch: (search: Record<string, unknown>) => ({
-    login: search.login as number | undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      login: search.login ? Number(search.login) : undefined,
+    } as { login?: number };
+  },
   head: () => ({
     meta: [
       {
@@ -32,7 +34,7 @@ function Home() {
   };
 
   useEffect(() => {
-    if (search.login === 1) {
+    if (search?.login === 1) {
       setIsLoginOpen(true);
     }
   }, [search]);
