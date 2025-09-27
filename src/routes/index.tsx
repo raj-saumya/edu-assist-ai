@@ -41,7 +41,7 @@ function Home() {
 
   return (
     <>
-      <div className="min-h-[calc(100vh-96px)] bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+      <div className="min-h-[calc(100vh-96px)]">
         {/* Compact Hero */}
         <section className="flex flex-col items-center justify-center px-6 py-16 text-center">
           <div className="max-w-3xl mx-auto">
