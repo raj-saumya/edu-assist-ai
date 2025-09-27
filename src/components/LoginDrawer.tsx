@@ -56,11 +56,10 @@ const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
 
     setIsLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    document.cookie = `auth-token=dummy-token-${Date.now()}; path=/; max-age=86400`; // 24 hours
-    document.cookie = `user-phone=${phoneNumber}; path=/; max-age=86400`;
+    document.cookie = `auth-token=dummy-token-${Date.now()}; path=/; max-age=86400`;
     setIsLoading(false);
     setDrawerOpen(false);
-    window.location.href = "/dashboard";
+    window.location.href = "/chat";
   };
 
   const handleBack = () => {
@@ -110,7 +109,7 @@ const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
                     placeholder="Enter phone number"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="pl-12 font-afacad text-lg"
+                    className="py-6 pl-12 font-afacad text-lg"
                     maxLength={10}
                   />
                 </div>
@@ -149,12 +148,30 @@ const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
                     pattern={REGEXP_ONLY_DIGITS}
                   >
                     <InputOTPGroup>
-                      <InputOTPSlot index={0} className="font-afacad text-lg" />
-                      <InputOTPSlot index={1} className="font-afacad text-lg" />
-                      <InputOTPSlot index={2} className="font-afacad text-lg" />
-                      <InputOTPSlot index={3} className="font-afacad text-lg" />
-                      <InputOTPSlot index={4} className="font-afacad text-lg" />
-                      <InputOTPSlot index={5} className="font-afacad text-lg" />
+                      <InputOTPSlot
+                        index={0}
+                        className="font-afacad text-lg p-6"
+                      />
+                      <InputOTPSlot
+                        index={1}
+                        className="font-afacad text-lg p-6"
+                      />
+                      <InputOTPSlot
+                        index={2}
+                        className="font-afacad text-lg p-6"
+                      />
+                      <InputOTPSlot
+                        index={3}
+                        className="font-afacad text-lg p-6"
+                      />
+                      <InputOTPSlot
+                        index={4}
+                        className="font-afacad text-lg p-6"
+                      />
+                      <InputOTPSlot
+                        index={5}
+                        className="font-afacad text-lg p-6"
+                      />
                     </InputOTPGroup>
                   </InputOTP>
                 </div>

@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-
+import { isAuthenticatedFn } from "~/utils/auth";
 import StatisticsGrid from "~/components/StatisticsGrid";
 import SubjectTrackCarousel from "~/components/SubjectTrackCarousel";
 import ContinueHistoryCarousel from "~/components/ContinueHistoryCarousel";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
+  beforeLoad: isAuthenticatedFn,
   head: () => ({
     meta: [
       {

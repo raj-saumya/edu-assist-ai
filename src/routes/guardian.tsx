@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { isAuthenticatedFn } from "~/utils/auth";
 import WeeklyInsights from "~/components/WeeklyInsights";
 
 export const Route = createFileRoute("/guardian")({
   component: Guardian,
+  beforeLoad: isAuthenticatedFn,
   head: () => ({
     meta: [
       {

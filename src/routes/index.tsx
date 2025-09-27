@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { createFileRoute, useRouter, useSearch } from "@tanstack/react-router";
+import { getAuthToken } from "~/utils/auth";
 import LoginDrawer from "~/components/LoginDrawer";
 
 export const Route = createFileRoute("/")({
   component: Home,
+  validateSearch: (search: Record<string, unknown>) => ({
+    login: search.login as number | undefined,
+  }),
   head: () => ({
     meta: [
       {
@@ -16,11 +20,22 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const router = useRouter();
+  const search = useSearch({ from: "/" });
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const handleRouteClick = (route: string) => {
-    router.navigate({ to: route });
+    if (getAuthToken()) {
+      router.navigate({ to: route });
+    } else {
+      setIsLoginOpen(true);
+    }
   };
+
+  useEffect(() => {
+    if (search.login === 1) {
+      setIsLoginOpen(true);
+    }
+  }, [search]);
 
   return (
     <>

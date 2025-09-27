@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { isAuthenticatedFn } from "~/utils/auth";
 import ChatMessageBox from "~/components/ChatMessageBox";
 import ChatBottomTray from "~/components/ChatBottomTray";
 
 export const Route = createFileRoute("/chat")({
   component: Chat,
+  beforeLoad: isAuthenticatedFn,
   head: () => ({
     meta: [
       {

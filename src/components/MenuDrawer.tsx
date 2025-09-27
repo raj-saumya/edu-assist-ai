@@ -8,6 +8,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "~/components/ui/drawer";
+import { logout, getAuthToken } from "~/utils/auth";
 
 type MenuDrawerProps = {
   trigger: ReactNode;
@@ -37,6 +38,7 @@ const MenuItem = ({ to, children, onClose }: MenuItemProps) => {
 
 const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
   const [open, setOpen] = useState(false);
+  const isLoggedIn = !!getAuthToken();
 
   const handleClose = () => {
     setOpen(false);
@@ -51,7 +53,7 @@ const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
             Menu
           </DrawerTitle>
         </DrawerHeader>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 h-full">
           <MenuItem to="/" onClose={handleClose}>
             Home
           </MenuItem>
@@ -64,6 +66,19 @@ const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
           <MenuItem to="/chat" onClose={handleClose}>
             Chat
           </MenuItem>
+          {isLoggedIn && (
+            <button
+              onClick={logout}
+              className="flex items-center gap-2 bg-[#2B2A47] text-sm font-afacad rounded-full py-2 px-6 w-fit mt-auto mb-10"
+            >
+              <span className="text-white font-afacad text-sm">LOGOUT</span>
+              <img
+                src="/images/icon-logout.svg"
+                alt="logout"
+                className="w-5 h-5"
+              />
+            </button>
+          )}
         </div>
       </DrawerContent>
     </Drawer>
