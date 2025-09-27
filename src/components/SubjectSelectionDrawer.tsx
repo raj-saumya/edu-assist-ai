@@ -9,9 +9,9 @@ import {
 } from "~/components/ui/accordion";
 import SUBJECT_DATA from "~/mock/subjectAccordian.mock.json";
 
-interface SubjectSelectionDrawerProps {
+type SubjectSelectionDrawerProps = {
   trigger: ReactNode;
-}
+};
 
 const SubjectSelectionDrawer = ({ trigger }: SubjectSelectionDrawerProps) => {
   const [open, setOpen] = useState(false);

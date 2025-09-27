@@ -2,14 +2,14 @@ import { create } from "zustand";
 
 export type MessageType = "user" | "ai";
 
-export interface Message {
+export type Message = {
   id: string;
   content: string;
   type: MessageType;
   timestamp: Date;
-}
+};
 
-interface ChatStore {
+type ChatStore = {
   messages: Message[];
   addMessage: (content: string, type: MessageType) => void;
   sendUserMessage: (content: string) => void;
