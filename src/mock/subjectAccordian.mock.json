@@ -1,0 +1,58 @@
+{
+  "subjects": [
+    {
+      "subject": "Mathematics",
+      "chapters": [
+        "Algebra Basics",
+        "Quadratic Equations",
+        "Linear Functions",
+        "Geometry Fundamentals"
+      ]
+    },
+    {
+      "subject": "Science",
+      "chapters": [
+        "Newton's Laws of Motion",
+        "Photosynthesis",
+        "Chemical Reactions",
+        "Energy and Matter"
+      ]
+    },
+    {
+      "subject": "History",
+      "chapters": [
+        "The Civil War",
+        "World War I",
+        "The Great Depression",
+        "Ancient Civilizations"
+      ]
+    },
+    {
+      "subject": "English",
+      "chapters": [
+        "The Great Gatsby",
+        "Grammar Essentials",
+        "Creative Writing",
+        "Literature Analysis"
+      ]
+    },
+    {
+      "subject": "Social Studies",
+      "chapters": [
+        "The American Revolution",
+        "Government Systems",
+        "Economics Basics",
+        "Cultural Studies"
+      ]
+    },
+    {
+      "subject": "Computer",
+      "chapters": [
+        "Programming Fundamentals",
+        "Web Development",
+        "Data Structures",
+        "Computer Systems"
+      ]
+    }
+  ]
+}

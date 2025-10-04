@@ -1,0 +1,14 @@
+{
+  "status": 200,
+  "message": {
+    "data": {
+      "access_token": "mock-token-12345",
+      "refresh_token": "mock-refresh-token-67890",
+      "user": {
+        "id": "1",
+        "phone_number": "1234567890",
+        "name": "Mock User"
+      }
+    }
+  }
+}
