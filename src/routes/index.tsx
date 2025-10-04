@@ -45,8 +45,8 @@ function Home() {
         {/* Compact Hero */}
         <section className="flex flex-col items-center justify-center px-6 py-16 text-center">
           <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 rounded-full">
-              <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-gradient-to-r from-[#4CA1AF]/10 to-[#004e92]/10 border border-blue-200/50 rounded-full">
+              <div className="w-2 h-2 bg-gradient-to-r from-[#4CA1AF] to-[#004e92] rounded-full animate-pulse"></div>
               <span className="text-gray-700 font-afacad text-sm font-medium">
                 AI-Powered Learning
               </span>
@@ -54,7 +54,7 @@ function Home() {
 
             <h1 className="font-afacad text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 leading-[1.1]">
               Learn Smarter
-              <span className="block text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text">
+              <span className="block text-transparent bg-gradient-to-r from-gray-600 via-blue-600 to-blue-900 bg-clip-text">
                 with AI
               </span>
             </h1>
@@ -66,7 +66,7 @@ function Home() {
 
             <button
               onClick={() => handleRouteClick("/chat")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-afacad font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-afacad font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
             >
               Start Learning
               <svg
@@ -123,7 +123,7 @@ function Home() {
                 className="group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-white/50 hover:bg-white hover:shadow-lg transition-all duration-300 text-left"
               >
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#4CA1AF] to-cyan-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"
@@ -221,7 +221,7 @@ function Home() {
               </p>
               <button
                 onClick={() => handleRouteClick("/chat")}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-afacad font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-afacad font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
               >
                 Get Started Free
                 <svg
