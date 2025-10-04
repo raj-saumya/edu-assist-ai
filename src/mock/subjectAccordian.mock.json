@@ -3,29 +3,55 @@
     {
       "subject": "Mathematics",
       "chapters": [
-        "Chapter 1: Algebraic Expressions and Identities ",
-        "Chapter 2: Understanding Quadrilaterals ",
-        "Chapter 3: Exponents and Powers",
-        "Chapter 4: Linear Equations in Two Variables",
-        "Chapter 5: Introduction to Euclid's Geometry"
+        "Algebra Basics",
+        "Quadratic Equations",
+        "Linear Functions",
+        "Geometry Fundamentals"
       ]
     },
     {
       "subject": "Science",
       "chapters": [
-        "Chapter 1: Matter in Our Surroundings",
-        "Chapter 2: Is Matter Around Us Pure?",
-        "Chapter 3: Atoms and Molecules",
-        "Chapter 4: Structure of the Atom"
+        "Newton's Laws of Motion",
+        "Photosynthesis",
+        "Chemical Reactions",
+        "Energy and Matter"
       ]
     },
     {
       "subject": "History",
       "chapters": [
-        "Chapter 1: The Making of the National Movement",
-        "Chapter 2: The National Movement in the 1920s",
-        "Chapter 3: The Quit India Movement",
-        "Chapter 4: Post-Independence Politics"
+        "The Civil War",
+        "World War I",
+        "The Great Depression",
+        "Ancient Civilizations"
+      ]
+    },
+    {
+      "subject": "English",
+      "chapters": [
+        "The Great Gatsby",
+        "Grammar Essentials",
+        "Creative Writing",
+        "Literature Analysis"
+      ]
+    },
+    {
+      "subject": "Social Studies",
+      "chapters": [
+        "The American Revolution",
+        "Government Systems",
+        "Economics Basics",
+        "Cultural Studies"
+      ]
+    },
+    {
+      "subject": "Computer",
+      "chapters": [
+        "Programming Fundamentals",
+        "Web Development",
+        "Data Structures",
+        "Computer Systems"
       ]
     }
   ]

@@ -1,8 +1,11 @@
 import { useKeenSlider } from "keen-slider/react";
-import CONTINUE_HISTORY from "~/mock/continueHistory.mock.json";
 import ContinueHistoryCard from "./ContinueHistoryCard";
 
-const ContinueHistoryCarousel = () => {
+import type { SubjectTrack } from "~/api/types";
+
+const ContinueHistoryCarousel = (props: { resume: SubjectTrack[] }) => {
+  const { resume } = props;
+
   const [sliderRef] = useKeenSlider({
     mode: "free-snap",
     slides: {
@@ -13,7 +16,7 @@ const ContinueHistoryCarousel = () => {
 
   return (
     <div ref={sliderRef} className="keen-slider">
-      {CONTINUE_HISTORY.continueHistory.map((item, index) => (
+      {resume.map((item, index) => (
         <div key={index} className="keen-slider__slide">
           <ContinueHistoryCard {...item} />
         </div>

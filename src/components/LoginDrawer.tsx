@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { useRouter } from "@tanstack/react-router";
+import { toast } from "sonner";
 import {
   Drawer,
   DrawerClose,
@@ -15,6 +17,7 @@ import {
   InputOTPSlot,
 } from "~/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { login, verifyOtp } from "~/api/auth.api";
 
 type LoginDrawerProps = {
   trigger?: ReactNode;
@@ -23,6 +26,7 @@ type LoginDrawerProps = {
 };
 
 const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -45,8 +49,17 @@ const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
     if (!phoneNumber || phoneNumber.length < 10) return;
 
     setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const response = await login(phoneNumber)
+      .then((res) => res)
+      .catch(() => null);
+
+    if (!response) {
+      setIsLoading(false);
+      toast.error("Failed to send OTP");
+      return;
+    }
+
     setIsLoading(false);
     setStep("otp");
   };
@@ -55,11 +68,21 @@ const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
     if (otp.length < 6) return;
 
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    document.cookie = `auth-token=dummy-token-${Date.now()}; path=/; max-age=86400`;
+    const response = await verifyOtp(phoneNumber, otp)
+      .then((res) => res.message.data)
+      .catch(() => null);
+
+    if (!response) {
+      setIsLoading(false);
+      toast.error("Failed to verify OTP");
+      return;
+    }
+
+    toast.success("Logged in successfully");
+    document.cookie = `auth-token=${response.access_token}; path=/; max-age=86400`;
     setIsLoading(false);
     setDrawerOpen(false);
-    window.location.href = "/chat";
+    router.navigate({ to: "/chat" });
   };
 
   const handleBack = () => {

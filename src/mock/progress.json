@@ -1,0 +1,87 @@
+{
+  "status": 200,
+  "message": {
+    "data": {
+      "progress": {
+        "label": "My Progress",
+        "title": "Hi Participant!",
+        "callout": "You have completed 5 lessons this week!",
+        "subjects": [
+          {
+            "subject": "Mathematics"
+          },
+          {
+            "subject": "Science",
+            "totalChapters": 10,
+            "completedChapters": 5
+          },
+          {
+            "subject": "History",
+            "totalChapters": 12,
+            "completedChapters": 8
+          },
+          {
+            "subject": "English"
+          },
+          {
+            "subject": "Social Studies",
+            "totalChapters": 16,
+            "completedChapters": 5
+          },
+          {
+            "subject": "Computer"
+          }
+        ]
+      },
+      "history": {
+        "label": "Continue where you left off",
+        "resume": [
+          {
+            "subject": "Mathematics",
+            "chapter": "Quadratic Equations"
+          },
+          {
+            "subject": "Science",
+            "chapter": "Newton's Laws of Motion"
+          },
+          {
+            "subject": "History",
+            "chapter": "The Civil War"
+          },
+          {
+            "subject": "English",
+            "chapter": "The Great Gatsby"
+          },
+          {
+            "subject": "Social Studies",
+            "chapter": "The American Revolution"
+          },
+          {
+            "subject": "Computer",
+            "chapter": "The Computer"
+          }
+        ]
+      },
+      "statistics": {
+        "metrics": [
+          {
+            "line1": "17",
+            "line2": "Total chapters studied"
+          },
+          {
+            "line1": "03",
+            "line2": "Chapters reading"
+          },
+          {
+            "line1": "12",
+            "line2": "Days of study streak"
+          },
+          {
+            "line1": "9.2",
+            "line2": "hours spent this week"
+          }
+        ]
+      }
+    }
+  }
+}
