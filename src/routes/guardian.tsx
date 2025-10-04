@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useLoaderData } from "@tanstack/react-router";
 import { isAuthenticatedFn } from "~/utils/auth";
+import { fetchParentDashboardData } from "~/api/dashboard.api";
 import WeeklyInsights from "~/components/WeeklyInsights";
 
 export const Route = createFileRoute("/guardian")({
@@ -13,9 +14,23 @@ export const Route = createFileRoute("/guardian")({
       },
     ],
   }),
+  loader: async () => {
+    const parentDashboardData = await fetchParentDashboardData();
+
+    return parentDashboardData;
+  },
 });
 
 function Guardian() {
+  const parentDashboardData = useLoaderData({ from: "/guardian" });
+
+  if (!parentDashboardData) {
+    return <div>No parent dashboard data</div>;
+  }
+
+  const { totalChildren, totalStudyHours, studyInsight, weeklyInsights } =
+    parentDashboardData ?? {};
+
   return (
     <section className="flex flex-col px-6">
       <h2 className="text-xl font-afacad font-medium my-4">
@@ -31,25 +46,27 @@ function Guardian() {
           <span className="text-base font-afacad text-right">
             Active Children
           </span>
-          <span className="text-5xl font-afacad font-medium text-right">2</span>
+          <span className="text-5xl font-afacad font-medium text-right">
+            {totalChildren}
+          </span>
         </div>
         <div className="flex flex-col rounded-lg p-4 bg-[#FFE6C2]">
           <div className="flex items-center mb-6">
             <img src="/images/icon-clock.svg" alt="child" className="w-6 h-6" />
-            <span className="text-xs font-afacad text-right ml-auto">
-              12% rise since last week
+            <span className="text-xs font-afacad text-right ml-auto sm:text-base">
+              {studyInsight}
             </span>
           </div>
           <span className="text-base font-afacad text-right">
             Total study hours
           </span>
           <span className="text-5xl font-afacad font-medium text-right">
-            2.5 hrs
+            {totalStudyHours}
           </span>
         </div>
       </div>
       <span className="my-2" />
-      <WeeklyInsights />
+      <WeeklyInsights weeklyInsights={weeklyInsights} />
       <span className="my-6" />
     </section>
   );

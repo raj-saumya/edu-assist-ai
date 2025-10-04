@@ -1,0 +1,27 @@
+{
+  "status": 200,
+  "message": {
+    "data": {
+      "totalChildren": 2,
+      "totalStudyHours": 2.5,
+      "studyInsight": "12% rise since last week",
+      "weeklyInsights": [
+        {
+          "name": "Aarav",
+          "subject": "Mathematics",
+          "insight": "Showed 25% improvement in quadratic equations this week"
+        },
+        {
+          "name": "Aarav",
+          "subject": "Mathematics",
+          "insight": "Struggling with multiplication tables - needs extra practice"
+        },
+        {
+          "name": "Priya",
+          "subject": "Science",
+          "insight": "Completed all chapters in Photosynthesis with 90+ accuracy"
+        }
+      ]
+    }
+  }
+}

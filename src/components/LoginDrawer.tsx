@@ -17,7 +17,7 @@ import {
   InputOTPSlot,
 } from "~/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { login, verifyOtp } from "~/api/auth";
+import { login, verifyOtp } from "~/api/auth.api";
 
 type LoginDrawerProps = {
   trigger?: ReactNode;

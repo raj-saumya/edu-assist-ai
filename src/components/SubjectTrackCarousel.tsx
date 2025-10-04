@@ -1,8 +1,11 @@
 import { useKeenSlider } from "keen-slider/react";
 import SubjectTrackCard from "./SubjectTrackCard";
-import SUBJECT_TRACK_CARDS from "~/mock/subjectTrack.mock.json";
 
-const SubjectTrackCarousel = () => {
+import type { SubjectConvoHistory } from "~/api/types";
+
+const SubjectTrackCarousel = (props: { subjects: SubjectConvoHistory[] }) => {
+  const { subjects } = props;
+
   const [sliderRef] = useKeenSlider({
     mode: "free-snap",
     slides: {
@@ -13,13 +16,13 @@ const SubjectTrackCarousel = () => {
 
   return (
     <div ref={sliderRef} className="keen-slider">
-      {SUBJECT_TRACK_CARDS.subjectTrackCards.map((card, index) => (
+      {subjects.map((subject, index) => (
         <div
           key={index}
           className="keen-slider__slide"
           style={{ minWidth: "auto", width: "auto" }}
         >
-          <SubjectTrackCard {...card} index={index} />
+          <SubjectTrackCard {...subject} index={index} />
         </div>
       ))}
     </div>
