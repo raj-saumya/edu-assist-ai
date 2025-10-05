@@ -9,6 +9,7 @@ import {
   DrawerTrigger,
 } from "~/components/ui/drawer";
 import { logout, getAuthToken } from "~/utils/auth";
+import { isStudentProfile } from "~/utils/profile";
 
 type MenuDrawerProps = {
   trigger: ReactNode;
@@ -39,6 +40,7 @@ const MenuItem = ({ to, children, onClose }: MenuItemProps) => {
 const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
   const [open, setOpen] = useState(false);
   const isLoggedIn = !!getAuthToken();
+  const isStudent = isStudentProfile();
 
   const handleClose = () => {
     setOpen(false);
@@ -60,9 +62,11 @@ const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
           <MenuItem to="/dashboard" onClose={handleClose}>
             Dashboard
           </MenuItem>
-          <MenuItem to="/guardian" onClose={handleClose}>
-            Guardian
-          </MenuItem>
+          {!isStudent && (
+            <MenuItem to="/guardian" onClose={handleClose}>
+              Guardian
+            </MenuItem>
+          )}
           <MenuItem to="/chat" onClose={handleClose}>
             Chat
           </MenuItem>

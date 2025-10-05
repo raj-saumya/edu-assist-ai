@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "message": {
+    "data": {
+      "profiles": [
+        {
+          "profile_type": "parent",
+          "profile_name": "Parent"
+        },
+        {
+          "profile_type": "student",
+          "profile_name": "Student"
+        }
+      ]
+    }
+  }
+}

@@ -3,6 +3,7 @@ import progressMock from "../mock/progress.json";
 import dashboardMock from "../mock/dashboard.json";
 import authLoginMock from "../mock/auth-login.json";
 import authVerifyOtpMock from "../mock/auth-verify-otp.json";
+import profilesMock from "../mock/profiles.json";
 
 const USE_MOCK = true;
 
@@ -39,6 +40,13 @@ const query = ky.create({
 
           if (pathname.includes("/auth/verify-otp")) {
             return new Response(JSON.stringify(authVerifyOtpMock), {
+              status: 200,
+              headers: { "Content-Type": "application/json" },
+            });
+          }
+
+          if (pathname.includes("/profiles")) {
+            return new Response(JSON.stringify(profilesMock), {
               status: 200,
               headers: { "Content-Type": "application/json" },
             });

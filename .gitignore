@@ -22,3 +22,4 @@ yarn.lock
 /.claude/
 # Local Netlify folder
 .netlify
+**/routeTree.gen.ts

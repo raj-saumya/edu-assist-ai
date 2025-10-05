@@ -1,11 +1,21 @@
-import { createFileRoute, useLoaderData } from "@tanstack/react-router";
+import { createFileRoute, useLoaderData, redirect } from "@tanstack/react-router";
 import { isAuthenticatedFn } from "~/utils/auth";
 import { fetchParentDashboardData } from "~/api/dashboard.api";
 import WeeklyInsights from "~/components/WeeklyInsights";
+import { getProfileType } from "~/utils/profile";
 
 export const Route = createFileRoute("/guardian")({
   component: Guardian,
-  beforeLoad: isAuthenticatedFn,
+  beforeLoad: async (opts) => {
+    // Check authentication first
+    await isAuthenticatedFn(opts);
+
+    // Check if user is parent
+    const profileType = getProfileType();
+    if (profileType === "student") {
+      throw redirect({ to: "/" });
+    }
+  },
   head: () => ({
     meta: [
       {

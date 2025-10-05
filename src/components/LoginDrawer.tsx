@@ -82,7 +82,7 @@ const LoginDrawer = ({ trigger, isOpen, onOpenChange }: LoginDrawerProps) => {
     document.cookie = `auth-token=${response.access_token}; path=/; max-age=86400`;
     setIsLoading(false);
     setDrawerOpen(false);
-    router.navigate({ to: "/chat" });
+    router.navigate({ to: "/profile" });
   };
 
   const handleBack = () => {

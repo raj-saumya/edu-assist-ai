@@ -58,3 +58,14 @@ export type ParentDashboardResponse = {
   studyInsight: string;
   weeklyInsights: WeeklyInsight[];
 };
+
+export type Profile = {
+  profile_type: string;
+  profile_name: string;
+  account_created: Date;
+};
+
+export type ProfilesResponse = {
+  profiles: Profile[];
+};
+

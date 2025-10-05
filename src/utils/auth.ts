@@ -18,6 +18,11 @@ export const getAuthToken = (): string | null => {
 export const logout = () => {
   document.cookie =
     "auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie =
+    "profile_type=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie =
+    "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  localStorage.clear();
   window.location.href = "/";
 };
 
