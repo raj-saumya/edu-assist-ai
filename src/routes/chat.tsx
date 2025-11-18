@@ -18,11 +18,11 @@ export const Route = createFileRoute("/chat")({
 
 function Chat() {
   return (
-    <section className="flex flex-col h-[calc(100vh-96px)] px-6">
+    <section className="flex flex-col h-[calc(100vh-96px)] px-6 bg-[#0f1117]">
       <div className="flex-1 overflow-hidden">
         <ChatMessageBox />
       </div>
-      <div className="flex-shrink-0 mt-4">
+      <div className="flex-shrink-0 mt-4 pb-4">
         <ChatBottomTray />
       </div>
     </section>

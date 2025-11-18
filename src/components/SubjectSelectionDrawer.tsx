@@ -28,25 +28,25 @@ const SubjectSelectionDrawer = ({ trigger, open: controlledOpen, onOpenChange }:
   return (
     <Drawer open={open} onOpenChange={setOpen} direction="bottom">
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className="inset-y-auto inset-x-0 bottom-0 top-auto h-auto w-full rounded-t-[10px]">
-        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-6 mt-4" />
+      <DrawerContent className="inset-y-auto inset-x-0 bottom-0 top-auto h-auto w-full rounded-t-[10px] bg-zinc-900 border-zinc-800">
+        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-700 mb-6 mt-4" />
         <div className="p-6 pt-2">
           <Accordion type="single" defaultValue="item-0" collapsible>
             {SUBJECT_DATA.subjects.map((subject, index) => (
-              <AccordionItem key={subject.subject} value={`item-${index}`}>
-                <AccordionTrigger className="font-afacad text-lg font-medium">
+              <AccordionItem key={subject.subject} value={`item-${index}`} className="border-zinc-800">
+                <AccordionTrigger className="font-heading text-lg font-medium text-white hover:text-amber-400">
                   {subject.subject}
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="flex flex-col gap-2">
                     {subject.chapters.map((chapter) => (
-                      <button
-                        key={chapter}
-                        onClick={() =>
-                          handleChapterSelect(subject.subject, chapter)
-                        }
-                        className="font-afacad text-base text-left mb-2"
-                      >
+                          <button
+                            key={chapter}
+                            onClick={() =>
+                              handleChapterSelect(subject.subject, chapter)
+                            }
+                            className="text-base text-left mb-2 text-gray-300 hover:text-amber-400 transition-colors"
+                          >
                         {chapter}
                       </button>
                     ))}

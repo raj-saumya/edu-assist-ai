@@ -45,8 +45,7 @@ export const isAuthenticatedFn = createIsomorphicFn()
 
     if (!token) {
       throw redirect({
-        to: "/",
-        search: { login: 1 },
+        to: "/login",
       });
     }
   })
@@ -55,8 +54,7 @@ export const isAuthenticatedFn = createIsomorphicFn()
 
     if (!token) {
       throw redirect({
-        to: "/",
-        search: { login: 1 },
+        to: "/login",
       });
     }
   });

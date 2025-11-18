@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react";
-import { createFileRoute, useRouter, useSearch } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { getAuthToken } from "~/utils/auth";
-import LoginDrawer from "~/components/LoginDrawer";
 
 export const Route = createFileRoute("/")({
   component: Home,
-  validateSearch: (search: Record<string, unknown>) => {
-    return {
-      login: search.login ? Number(search.login) : undefined,
-    } as { login?: number };
-  },
   head: () => ({
     meta: [
       {
@@ -22,51 +15,51 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const router = useRouter();
-  const search = useSearch({ from: "/" });
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   const handleRouteClick = (route: string) => {
     if (getAuthToken()) {
       router.navigate({ to: route });
     } else {
-      setIsLoginOpen(true);
+      router.navigate({ to: "/login" });
     }
   };
 
-  useEffect(() => {
-    if (search?.login === 1) {
-      setIsLoginOpen(true);
-    }
-  }, [search]);
-
   return (
     <>
-      <div className="min-h-[calc(100vh-96px)]">
-        {/* Compact Hero */}
-        <section className="flex flex-col items-center justify-center px-6 py-16 text-center">
-          <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-gradient-to-r from-[#4CA1AF]/10 to-[#004e92]/10 border border-blue-200/50 rounded-full">
-              <div className="w-2 h-2 bg-gradient-to-r from-[#4CA1AF] to-[#004e92] rounded-full animate-pulse"></div>
-              <span className="text-gray-700 font-afacad text-sm font-medium">
+      <div className="min-h-[calc(100vh-96px)] bg-[#0f1117]">
+        {/* Hero + Features Section with Gradient */}
+        <div className="relative overflow-hidden">
+          {/* Gradient Background Effect */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 via-amber-500/10 to-transparent"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-500/20 rounded-full blur-[120px] animate-pulse"></div>
+          <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-600/20 rounded-full blur-[120px]"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-amber-400/10 rounded-full blur-[100px]"></div>
+          
+          {/* Compact Hero */}
+          <section className="relative flex flex-col items-center justify-center px-6 py-16 text-center">
+            <div className="max-w-3xl mx-auto relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-amber-500/10 border border-amber-500/20 rounded-full">
+              <div className="w-2 h-2 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full animate-pulse"></div>
+              <span className="text-gray-300 text-sm font-medium">
                 AI-Powered Learning
               </span>
             </div>
 
-            <h1 className="font-afacad text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 leading-[1.1]">
+            <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-4 leading-[1.1]">
               Learn Smarter
-              <span className="block text-transparent bg-gradient-to-r from-gray-600 via-blue-600 to-blue-900 bg-clip-text">
+              <span className="block text-transparent bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text">
                 with AI
               </span>
             </h1>
 
-            <p className="font-afacad text-lg text-gray-600 mb-8 max-w-xl mx-auto">
+            <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
               Your intelligent companion for NCERT textbooks. Get instant
               answers and accelerate learning.
             </p>
 
             <button
               onClick={() => handleRouteClick("/chat")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-afacad font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold rounded-xl hover:shadow-xl hover:shadow-amber-500/30 transform hover:scale-105 transition-all duration-300"
             >
               Start Learning
               <svg
@@ -83,15 +76,16 @@ function Home() {
                 />
               </svg>
             </button>
-          </div>
-        </section>
-        {/* Compact Features Grid */}
-        <section className="px-6 pb-12">
+            </div>
+          </section>
+          
+          {/* Compact Features Grid */}
+          <section className="relative px-6 pb-12 z-10">
           <div className="max-w-5xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <button
                 onClick={() => handleRouteClick("/dashboard")}
-                className="group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-white/50 hover:bg-white hover:shadow-lg transition-all duration-300 text-left"
+                className="group relative p-6 bg-zinc-900/50 backdrop-blur-sm rounded-xl border border-zinc-800 hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-lg transition-all duration-300 text-left"
               >
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -109,21 +103,21 @@ function Home() {
                       />
                     </svg>
                   </div>
-                  <h3 className="font-afacad text-lg font-bold text-gray-900">
+                  <h3 className="font-heading text-lg font-bold text-white">
                     Dashboard
                   </h3>
                 </div>
-                <p className="font-afacad text-sm text-gray-600">
+                <p className="text-sm text-gray-400">
                   Track progress and visualize your learning journey
                 </p>
               </button>
 
               <button
                 onClick={() => handleRouteClick("/chat")}
-                className="group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-white/50 hover:bg-white hover:shadow-lg transition-all duration-300 text-left"
+                className="group relative p-6 bg-zinc-900/50 backdrop-blur-sm rounded-xl border border-zinc-800 hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-lg transition-all duration-300 text-left"
               >
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#4CA1AF] to-cyan-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"
@@ -138,21 +132,21 @@ function Home() {
                       />
                     </svg>
                   </div>
-                  <h3 className="font-afacad text-lg font-bold text-gray-900">
+                  <h3 className="font-heading text-lg font-bold text-white">
                     AI Chat
                   </h3>
                 </div>
-                <p className="font-afacad text-sm text-gray-600">
+                <p className="text-sm text-gray-400">
                   Get instant answers from your NCERT textbooks
                 </p>
               </button>
 
               <button
                 onClick={() => handleRouteClick("/guardian")}
-                className="group relative p-6 bg-white/70 backdrop-blur-sm rounded-xl border border-white/50 hover:bg-white hover:shadow-lg transition-all duration-300 text-left"
+                className="group relative p-6 bg-zinc-900/50 backdrop-blur-sm rounded-xl border border-zinc-800 hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-lg transition-all duration-300 text-left"
               >
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 bg-gradient-to-br from-secondary-500 to-secondary-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <svg
                       className="w-5 h-5 text-white"
                       fill="none"
@@ -167,45 +161,47 @@ function Home() {
                       />
                     </svg>
                   </div>
-                  <h3 className="font-afacad text-lg font-bold text-gray-900">
+                  <h3 className="font-heading text-lg font-bold text-white">
                     Guardian
                   </h3>
                 </div>
-                <p className="font-afacad text-sm text-gray-600">
+                <p className="text-sm text-gray-400">
                   Parent dashboard to monitor child's learning
                 </p>
               </button>
             </div>
           </div>
-        </section>
+          </section>
+        </div>
+        
         {/* Compact Stats + CTA */}
-        <section className="px-6 py-12 bg-white/30 backdrop-blur-sm border-y border-white/20">
+        <section className="px-6 py-12 bg-zinc-900/30 backdrop-blur-sm border-y border-zinc-800">
           <div className="max-w-4xl mx-auto">
             {/* Stats Row */}
-            <div className="flex justify-center items-center gap-12 mb-10">
+            <div className="flex justify-center items-center gap-10 mb-10">
               <div className="text-center">
-                <div className="font-afacad text-2xl font-bold text-gray-900">
+                <div className="font-heading text-2xl font-bold text-white">
                   10K+
                 </div>
-                <div className="font-afacad text-xs text-gray-600 uppercase tracking-wider">
+                <div className="text-xs text-gray-400 uppercase tracking-wider">
                   Questions
                 </div>
               </div>
-              <div className="w-px h-8 bg-gray-300"></div>
+              <div className="w-px h-8 bg-zinc-700"></div>
               <div className="text-center">
-                <div className="font-afacad text-2xl font-bold text-gray-900">
+                <div className="font-heading text-2xl font-bold text-white">
                   15+
                 </div>
-                <div className="font-afacad text-xs text-gray-600 uppercase tracking-wider">
+                <div className="text-xs text-gray-400 uppercase tracking-wider">
                   Subjects
                 </div>
               </div>
-              <div className="w-px h-8 bg-gray-300"></div>
+              <div className="w-px h-8 bg-zinc-700"></div>
               <div className="text-center">
-                <div className="font-afacad text-2xl font-bold text-gray-900">
+                <div className="font-heading text-2xl font-bold text-white">
                   500+
                 </div>
-                <div className="font-afacad text-xs text-gray-600 uppercase tracking-wider">
+                <div className="text-xs text-gray-400 uppercase tracking-wider">
                   Chapters
                 </div>
               </div>
@@ -213,15 +209,15 @@ function Home() {
 
             {/* CTA */}
             <div className="text-center">
-              <h2 className="font-afacad text-2xl font-bold text-gray-900 mb-3">
+              <h2 className="font-heading text-2xl font-bold text-white mb-3">
                 Ready to transform your learning?
               </h2>
-              <p className="font-afacad text-gray-600 mb-6 max-w-md mx-auto">
+              <p className="text-gray-400 mb-6 max-w-md mx-auto">
                 Join thousands of students learning smarter with AI.
               </p>
               <button
                 onClick={() => handleRouteClick("/chat")}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white font-afacad font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-bold rounded-xl hover:shadow-xl hover:shadow-amber-500/30 transform hover:scale-105 transition-all duration-300"
               >
                 Get Started Free
                 <svg
@@ -242,7 +238,6 @@ function Home() {
           </div>
         </section>
       </div>
-      <LoginDrawer isOpen={isLoginOpen} onOpenChange={setIsLoginOpen} />
     </>
   );
 }

@@ -42,9 +42,9 @@ const ProfileSelection = ({ profiles }: ProfileSelectionProps) => {
   }, []);
 
   return (
-    <div className="h-[calc(100vh-96px)] w-full flex flex-col items-center justify-center p-6">
+    <div className="h-[calc(100vh-96px)] w-full flex flex-col items-center justify-center p-6 bg-[#0f1117]">
       <div className="w-full">
-        <p className="text-2xl text-black text-center mb-6 font-afacad">
+        <p className="text-2xl text-white text-center mb-6 font-heading">
           Select profile to continue
         </p>
 
@@ -52,21 +52,21 @@ const ProfileSelection = ({ profiles }: ProfileSelectionProps) => {
           {profiles.profiles.map((profile) => (
             <button
               key={profile.profile_type}
-              className="relative flex items-center justify-center w-full h-full group hover:scale-105 transition-all duration-300"
+              className="relative flex items-center justify-center w-full h-full group hover:scale-105 transition-all duration-300 rounded-lg overflow-hidden border border-zinc-800"
               onClick={() => handleProfileSelect(profile.profile_type)}
             >
               <img
                 src={getProfileAvatar(profile.profile_type)}
                 alt={profile.profile_name}
-                className="w-full h-full aspect-square object-cover rounded-lg"
+                className="w-full h-full aspect-square object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 rounded-lg" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
               {selectedProfile === profile.profile_type && (
-                <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <Check className="w-10 h-10 text-white" strokeWidth={3} />
+                <div className="absolute inset-0 flex items-center justify-center z-10 bg-amber-500/20">
+                  <Check className="w-10 h-10 text-amber-400" strokeWidth={3} />
                 </div>
               )}
-              <span className="absolute bottom-4 left-4 text-xl text-white text-center font-afacad z-10">
+              <span className="absolute bottom-4 left-4 text-xl text-white text-center font-heading z-10">
                 {profile.profile_name}
               </span>
             </button>

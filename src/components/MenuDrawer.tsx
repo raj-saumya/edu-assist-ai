@@ -27,11 +27,11 @@ const MenuItem = ({ to, children, onClose }: MenuItemProps) => {
   };
 
   return (
-    <Link
-      to={to}
-      onClick={handleClick}
-      className="font-afacad text-xl text-left"
-    >
+        <Link
+          to={to}
+          onClick={handleClick}
+          className="text-xl text-left text-white hover:text-amber-400 transition-colors"
+        >
       {children}
     </Link>
   );
@@ -49,9 +49,9 @@ const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent className="p-8">
+      <DrawerContent className="p-8 bg-zinc-900 border-zinc-800">
         <DrawerHeader className="p-0 text-left mb-6">
-          <DrawerTitle className="font-afacad font-medium text-2xl">
+          <DrawerTitle className="font-heading font-semibold text-2xl text-white">
             Menu
           </DrawerTitle>
         </DrawerHeader>
@@ -73,9 +73,9 @@ const MenuDrawer = ({ trigger }: MenuDrawerProps) => {
           {isLoggedIn && (
             <button
               onClick={logout}
-              className="flex items-center gap-2 bg-[#2B2A47] text-sm font-afacad rounded-full py-2 px-6 w-fit mt-auto mb-10"
+              className="flex items-center gap-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-sm rounded-full py-3 px-6 w-fit mt-auto mb-10 hover:shadow-lg hover:shadow-amber-500/30 transition-all"
             >
-              <span className="text-white font-afacad text-sm">LOGOUT</span>
+              <span className="text-black text-sm font-bold">LOGOUT</span>
               <img
                 src="/images/icon-logout.svg"
                 alt="logout"

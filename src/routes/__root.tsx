@@ -113,10 +113,10 @@ export const Route = createRootRoute({
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
       },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;700&display=swap",
-      },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap",
+          },
       {
         rel: "apple-touch-icon",
         sizes: "180x180",
@@ -135,6 +135,7 @@ export const Route = createRootRoute({
         href: "/favicon-16x16.png",
       },
       { rel: "manifest", href: "/site.webmanifest", color: "#fffff" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "icon", href: "/favicon.ico" },
     ],
     scripts: [],

@@ -14,32 +14,32 @@ const ChatActionsMenu = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="flex items-center justify-center bg-[#f6f6f6] p-2 h-12 w-12 rounded-full hover:bg-gray-300 transition-colors">
-            <img src="/images/icon-more.svg" alt="more" className="w-6 h-6" />
+          <button className="flex items-center justify-center bg-zinc-900 border border-zinc-800 p-2 h-12 w-12 rounded-full hover:bg-zinc-800 transition-colors">
+            <img src="/images/icon-more.svg" alt="more" className="w-6 h-6 brightness-0 invert" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"
-          className="flex flex-col gap-2 p-2 bg-white rounded-lg shadow-lg min-w-60"
+          className="flex flex-col gap-2 p-2 bg-zinc-900 border-zinc-800 rounded-lg shadow-lg min-w-60"
         >
           <DropdownMenuItem
             onClick={() => setIsSubjectDrawerOpen(true)}
-            className="cursor-pointer"
+            className="cursor-pointer hover:bg-zinc-800 focus:bg-zinc-800"
           >
             <img
               src="/images/icon-book.svg"
               alt="book"
-              className="w-6 h-6 mr-2"
+              className="w-6 h-6 mr-2 brightness-0 invert"
             />
-            <span className="text-lg font-afacad">Subjects</span>
+            <span className="text-lg text-white">Subjects</span>
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem className="cursor-pointer hover:bg-zinc-800 focus:bg-zinc-800">
             <img
               src="/images/icon-draw.svg"
               alt="draw"
-              className="w-6 h-6 mr-2"
+              className="w-6 h-6 mr-2 brightness-0 invert"
             />
-            <span className="text-lg font-afacad">Canvas</span>
+            <span className="text-lg text-white">Canvas</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

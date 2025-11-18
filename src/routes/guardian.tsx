@@ -42,35 +42,35 @@ function Guardian() {
     parentDashboardData ?? {};
 
   return (
-    <section className="flex flex-col px-6">
-      <h2 className="text-xl font-afacad font-medium my-4">
-        Monitor your children’s learning progress
+    <section className="flex flex-col px-6 bg-[#0f1117] min-h-[calc(100vh-96px)]">
+      <h2 className="text-xl font-heading font-medium my-4 text-white">
+        Monitor your children's learning progress
       </h2>
       <div className="grid grid-cols-2 gap-4">
-        <div className="flex flex-col rounded-lg p-4 bg-[#A9D1FF]">
+        <div className="flex flex-col rounded-lg p-4 bg-gradient-to-br from-primary-600/20 to-primary-700/10 border border-primary-500/20">
           <img
             src="/images/icon-children.svg"
             alt="child"
-            className="w-6 h-6 mb-6"
+            className="w-6 h-6 mb-6 brightness-0 invert"
           />
-          <span className="text-base font-afacad text-right">
+          <span className="text-base text-right text-gray-300">
             Active Children
           </span>
-          <span className="text-5xl font-afacad font-medium text-right">
+          <span className="text-5xl font-heading font-medium text-right text-white">
             {totalChildren}
           </span>
         </div>
-        <div className="flex flex-col rounded-lg p-4 bg-[#FFE6C2]">
+        <div className="flex flex-col rounded-lg p-4 bg-gradient-to-br from-accent-600/20 to-accent-700/10 border border-accent-500/20">
           <div className="flex items-center mb-6">
-            <img src="/images/icon-clock.svg" alt="child" className="w-6 h-6" />
-            <span className="text-xs font-afacad text-right ml-auto sm:text-base">
+            <img src="/images/icon-clock.svg" alt="child" className="w-6 h-6 brightness-0 invert" />
+            <span className="text-xs text-right ml-auto sm:text-base text-gray-300">
               {studyInsight}
             </span>
           </div>
-          <span className="text-base font-afacad text-right">
+          <span className="text-base text-right text-gray-300">
             Total study hours
           </span>
-          <span className="text-5xl font-afacad font-medium text-right">
+          <span className="text-5xl font-heading font-medium text-right text-white">
             {totalStudyHours}
           </span>
         </div>
