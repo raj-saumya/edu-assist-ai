@@ -41,7 +41,7 @@ export const testFnMw = startInstance
 
 export const testGetMiddleware = startInstance
   .createMiddleware()
-  .server(({ next, context }) => {
+  .server(({ next }) => {
     return next({
       context: {
         fromGetMiddleware: true,
@@ -74,7 +74,6 @@ export const Route = createRootRoute({
         });
       },
     },
-    test: () => {},
   },
   beforeLoad: ({ serverContext }) => {
     serverContext?.fromFetch;
