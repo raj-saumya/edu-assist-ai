@@ -74,7 +74,7 @@ export const Route = createRootRoute({
         });
       },
     },
-    test: (test) => {},
+    test: () => {},
   },
   beforeLoad: ({ serverContext }) => {
     serverContext?.fromFetch;
@@ -113,10 +113,10 @@ export const Route = createRootRoute({
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
       },
-          {
-            rel: "stylesheet",
-            href: "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap",
-          },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap",
+      },
       {
         rel: "apple-touch-icon",
         sizes: "180x180",

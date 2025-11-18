@@ -1,4 +1,8 @@
-import { createFileRoute, useLoaderData, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  useLoaderData,
+  redirect,
+} from "@tanstack/react-router";
 import { isAuthenticatedFn } from "~/utils/auth";
 import { fetchParentDashboardData } from "~/api/dashboard.api";
 import WeeklyInsights from "~/components/WeeklyInsights";
@@ -6,9 +10,9 @@ import { getProfileType } from "~/utils/profile";
 
 export const Route = createFileRoute("/guardian")({
   component: Guardian,
-  beforeLoad: async (opts) => {
+  beforeLoad: async () => {
     // Check authentication first
-    await isAuthenticatedFn(opts);
+    await isAuthenticatedFn();
 
     // Check if user is parent
     const profileType = getProfileType();
@@ -62,7 +66,11 @@ function Guardian() {
         </div>
         <div className="flex flex-col rounded-lg p-4 bg-gradient-to-br from-accent-600/20 to-accent-700/10 border border-accent-500/20">
           <div className="flex items-center mb-6">
-            <img src="/images/icon-clock.svg" alt="child" className="w-6 h-6 brightness-0 invert" />
+            <img
+              src="/images/icon-clock.svg"
+              alt="child"
+              className="w-6 h-6 brightness-0 invert"
+            />
             <span className="text-xs text-right ml-auto sm:text-base text-gray-300">
               {studyInsight}
             </span>
