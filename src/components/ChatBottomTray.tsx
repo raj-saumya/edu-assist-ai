@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useChatStore } from '~/store/chatStore'
-import SubjectSelectionDrawer from './SubjectSelectionDrawer'
+import ChatActionsMenu from './ChatActionsMenu'
 
 const ChatBottomTray = () => {
   const [inputValue, setInputValue] = useState('')
-  const sendUserMessage = useChatStore((state) => state.sendUserMessage)
+  const sendStreamingMessage = useChatStore((state) => state.sendStreamingMessage)
 
   const handleSendMessage = () => {
     if (inputValue.trim()) {
-      sendUserMessage(inputValue.trim())
+      sendStreamingMessage(inputValue.trim())
       setInputValue('')
     }
   }
@@ -44,13 +44,7 @@ const ChatBottomTray = () => {
         >
           <img src="/images/icon-send.svg" alt="send" className="w-6 h-6" />
         </button>
-        <SubjectSelectionDrawer
-          trigger={
-            <button className="flex items-center justify-center bg-[#f6f6f6] p-2 h-12 w-12 rounded-full hover:bg-gray-300 transition-colors">
-              <img src="/images/icon-book.svg" alt="book" className="w-8 h-8" />
-            </button>
-          }
-        />
+        <ChatActionsMenu />
       </div>
       <span className="text-xs font-afacad text-center text-black/40">
         AI responses are based on your NCERT textbooks

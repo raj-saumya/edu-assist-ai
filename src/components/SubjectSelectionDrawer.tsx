@@ -11,10 +11,14 @@ import SUBJECT_DATA from "~/mock/subjectAccordian.mock.json";
 
 type SubjectSelectionDrawerProps = {
   trigger: ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
-const SubjectSelectionDrawer = ({ trigger }: SubjectSelectionDrawerProps) => {
-  const [open, setOpen] = useState(false);
+const SubjectSelectionDrawer = ({ trigger, open: controlledOpen, onOpenChange }: SubjectSelectionDrawerProps) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen;
+  const setOpen = onOpenChange || setInternalOpen;
 
   const handleChapterSelect = (subject: string, chapter: string) => {
     console.log("Selected:", subject, chapter);

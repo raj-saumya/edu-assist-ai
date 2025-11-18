@@ -6,7 +6,7 @@
       "refresh_token": "mock-refresh-token-67890",
       "user": {
         "id": "1",
-        "phone_number": "1234567890",
+        "phone_number": "123******90",
         "name": "Mock User"
       }
     }

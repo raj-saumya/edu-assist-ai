@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { streamConvoWithDummyData } from "~/api/convo";
 
 export type MessageType = "user" | "ai";
 
@@ -12,7 +13,9 @@ export type Message = {
 type ChatStore = {
   messages: Message[];
   addMessage: (content: string, type: MessageType) => void;
+  updateMessage: (id: string, content: string) => void;
   sendUserMessage: (content: string) => void;
+  sendStreamingMessage: (content: string) => void;
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -45,6 +48,14 @@ export const useChatStore = create<ChatStore>((set) => ({
     }));
   },
 
+  updateMessage: (id: string, content: string) => {
+    set((state) => ({
+      messages: state.messages.map((msg) =>
+        msg.id === id ? { ...msg, content } : msg
+      ),
+    }));
+  },
+
   sendUserMessage: (content: string) => {
     set((state) => {
       const userMessage: Message = {
@@ -66,5 +77,66 @@ export const useChatStore = create<ChatStore>((set) => ({
         messages: [...state.messages, userMessage, aiMessage],
       };
     });
+  },
+
+  sendStreamingMessage: (content: string) => {
+    const userMessageId = Date.now().toString();
+    const aiMessageId = (Date.now() + 1).toString();
+
+    // Add user message
+    set((state) => {
+      const userMessage: Message = {
+        id: userMessageId,
+        content,
+        type: "user",
+        timestamp: new Date(),
+      };
+
+      return {
+        messages: [...state.messages, userMessage],
+      };
+    });
+
+    // Add empty AI message that will be updated as stream comes in
+    set((state) => {
+      const aiMessage: Message = {
+        id: aiMessageId,
+        content: "",
+        type: "ai",
+        timestamp: new Date(),
+      };
+
+      return {
+        messages: [...state.messages, aiMessage],
+      };
+    });
+
+    // Start streaming
+    streamConvoWithDummyData(
+      (chunk) => {
+        // Update AI message with the extracted response content
+        // The chunk is already the parsed 'response' field from the JSON
+        set((state) => ({
+          messages: state.messages.map((msg) =>
+            msg.id === aiMessageId ? { ...msg, content: chunk } : msg
+          ),
+        }));
+      },
+      () => {
+        // On complete
+        console.log("Stream complete");
+      },
+      (error) => {
+        // On error
+        console.error("Stream error:", error);
+        set((state) => ({
+          messages: state.messages.map((msg) =>
+            msg.id === aiMessageId
+              ? { ...msg, content: "Error: Failed to get response" }
+              : msg
+          ),
+        }));
+      }
+    );
   },
 }));
