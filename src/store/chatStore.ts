@@ -16,7 +16,10 @@ type ChatStore = {
   updateMessage: (id: string, content: string) => void;
   sendUserMessage: (content: string) => void;
   sendStreamingMessage: (content: string) => void;
-}
+  isCanvasOpen: boolean;
+  toggleCanvas: () => void;
+  setCanvasOpen: (isOpen: boolean) => void;
+};
 
 export const useChatStore = create<ChatStore>((set) => ({
   messages: [
@@ -139,4 +142,7 @@ export const useChatStore = create<ChatStore>((set) => ({
       }
     );
   },
+  isCanvasOpen: false,
+  toggleCanvas: () => set((state) => ({ isCanvasOpen: !state.isCanvasOpen })),
+  setCanvasOpen: (isOpen: boolean) => set({ isCanvasOpen: isOpen }),
 }));

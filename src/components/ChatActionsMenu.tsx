@@ -6,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import SubjectSelectionDrawer from "./SubjectSelectionDrawer";
+import { useChatStore } from "~/store/chatStore";
 
 const ChatActionsMenu = () => {
   const [isSubjectDrawerOpen, setIsSubjectDrawerOpen] = useState(false);
@@ -33,7 +34,10 @@ const ChatActionsMenu = () => {
             />
             <span className="text-lg text-white">Subjects</span>
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer hover:bg-zinc-800 focus:bg-zinc-800">
+          <DropdownMenuItem 
+            className="cursor-pointer hover:bg-zinc-800 focus:bg-zinc-800"
+            onClick={() => useChatStore.getState().toggleCanvas()}
+          >
             <img
               src="/images/icon-draw.svg"
               alt="draw"
