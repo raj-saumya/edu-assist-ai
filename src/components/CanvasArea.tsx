@@ -9,7 +9,9 @@ import {
   Palette,
   Minus,
   Plus,
+  Sparkles,
 } from "lucide-react";
+import { useChatStore } from "~/store/chatStore";
 
 type Point = [number, number, number];
 
@@ -64,8 +66,10 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
   const [undoneStrokes, setUndoneStrokes] = useState<Stroke[]>([]);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isSendingToAI, setIsSendingToAI] = useState(false);
 
   const svgRef = useRef<SVGSVGElement>(null);
+  const sendStreamingMessage = useChatStore((state) => state.sendStreamingMessage);
 
   useEffect(() => {
     setIsClient(true);
@@ -186,6 +190,71 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
 
   const decreaseSize = () => {
     setStrokeSize((prev) => Math.max(prev - 2, 2));
+  };
+
+  const handleSendToAI = async () => {
+    if (!svgRef.current || strokes.length === 0 || isSendingToAI) return;
+
+    setIsSendingToAI(true);
+
+    try {
+      // Convert SVG to canvas
+      const svg = svgRef.current;
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+
+      // Get SVG dimensions
+      const bbox = svg.getBBox();
+      canvas.width = bbox.width + bbox.x * 2 || 800;
+      canvas.height = bbox.height + bbox.y * 2 || 600;
+
+      // Create blob URL for the SVG
+      const svgBlob = new Blob([svgData], {
+        type: "image/svg+xml;charset=utf-8",
+      });
+      const url = URL.createObjectURL(svgBlob);
+
+      img.onload = () => {
+        if (ctx) {
+          // Fill background
+          ctx.fillStyle = "#09090b"; // zinc-950
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          // Draw the SVG
+          ctx.drawImage(img, 0, 0);
+
+          // Convert canvas to blob
+          canvas.toBlob((blob) => {
+            if (blob) {
+              // Create object URL for the image
+              const imageUrl = URL.createObjectURL(blob);
+
+              // Send to chat with the image
+              sendStreamingMessage(
+                "Can you help me understand this drawing?",
+                imageUrl
+              );
+            }
+            setIsSendingToAI(false);
+          }, "image/png");
+        }
+
+        URL.revokeObjectURL(url);
+      };
+
+      img.onerror = () => {
+        console.error("Failed to load SVG image");
+        setIsSendingToAI(false);
+        URL.revokeObjectURL(url);
+      };
+
+      img.src = url;
+    } catch (error) {
+      console.error("Error converting canvas to image:", error);
+      setIsSendingToAI(false);
+    }
   };
 
   if (!isClient) {
@@ -318,6 +387,22 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
             aria-label="Clear canvas"
           >
             <Trash2 className="w-4 h-4 text-zinc-200" />
+          </button>
+
+          <div className="w-px h-6 bg-zinc-700 mx-1"></div>
+
+          <button
+            onClick={handleSendToAI}
+            disabled={strokes.length === 0 || isSendingToAI}
+            className="p-2 rounded-lg bg-gradient-to-r from-amber-400 to-yellow-500 hover:shadow-lg hover:shadow-amber-500/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            aria-label="Send to AI"
+            title="Send drawing to AI"
+          >
+            {isSendingToAI ? (
+              <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <Sparkles className="w-4 h-4 text-black" />
+            )}
           </button>
         </div>
       </div>

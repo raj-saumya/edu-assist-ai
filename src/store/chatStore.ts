@@ -8,16 +8,17 @@ export type Message = {
   content: string;
   type: MessageType;
   timestamp: Date;
+  imageUrl?: string;
 };
 
 export type WorkspaceType = "canvas" | "pdf" | null;
 
 type ChatStore = {
   messages: Message[];
-  addMessage: (content: string, type: MessageType) => void;
+  addMessage: (content: string, type: MessageType, imageUrl?: string) => void;
   updateMessage: (id: string, content: string) => void;
-  sendUserMessage: (content: string) => void;
-  sendStreamingMessage: (content: string) => void;
+  sendUserMessage: (content: string, imageUrl?: string) => void;
+  sendStreamingMessage: (content: string, imageUrl?: string) => void;
   activeWorkspace: WorkspaceType;
   toggleWorkspace: (type: WorkspaceType) => void;
   closeWorkspace: () => void;
@@ -43,12 +44,13 @@ export const useChatStore = create<ChatStore>((set) => ({
     },
   ],
 
-  addMessage: (content: string, type: MessageType) => {
+  addMessage: (content: string, type: MessageType, imageUrl?: string) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       content,
       type,
       timestamp: new Date(),
+      imageUrl,
     };
 
     set((state) => ({
@@ -64,13 +66,14 @@ export const useChatStore = create<ChatStore>((set) => ({
     }));
   },
 
-  sendUserMessage: (content: string) => {
+  sendUserMessage: (content: string, imageUrl?: string) => {
     set((state) => {
       const userMessage: Message = {
         id: Date.now().toString(),
         content,
         type: "user",
         timestamp: new Date(),
+        imageUrl,
       };
 
       const aiMessage: Message = {
@@ -87,7 +90,7 @@ export const useChatStore = create<ChatStore>((set) => ({
     });
   },
 
-  sendStreamingMessage: (content: string) => {
+  sendStreamingMessage: (content: string, imageUrl?: string) => {
     const userMessageId = Date.now().toString();
     const aiMessageId = (Date.now() + 1).toString();
 
@@ -98,6 +101,7 @@ export const useChatStore = create<ChatStore>((set) => ({
         content,
         type: "user",
         timestamp: new Date(),
+        imageUrl,
       };
 
       return {
