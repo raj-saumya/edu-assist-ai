@@ -4,10 +4,10 @@ import { isAuthenticatedFn } from "~/utils/auth";
 import ChatMessageBox from "~/components/ChatMessageBox";
 import ChatBottomTray from "~/components/ChatBottomTray";
 import Workspace from "~/components/Workspace";
-import CanvasArea from "~/components/CanvasArea";
 import { useChatStore } from "~/store/chatStore";
 
 const PDFViewer = lazy(() => import("~/components/PDFViewer"));
+const CanvasArea = lazy(() => import("~/components/CanvasArea"));
 
 export const Route = createFileRoute("/chat")({
   component: Chat,
@@ -27,21 +27,25 @@ function Chat() {
   const isWorkspaceOpen = activeWorkspace !== null;
 
   const renderWorkspaceContent = () => {
+    const loadingFallback = (
+      <div className="flex items-center justify-center h-full bg-zinc-950">
+        <div className="text-center text-zinc-500">
+          <div className="w-8 h-8 border-4 border-zinc-700 border-t-amber-500 rounded-full animate-spin mx-auto mb-3"></div>
+          <p className="text-sm">Loading...</p>
+        </div>
+      </div>
+    );
+
     switch (activeWorkspace) {
       case "canvas":
-        return <CanvasArea />;
+        return (
+          <Suspense fallback={loadingFallback}>
+            <CanvasArea />
+          </Suspense>
+        );
       case "pdf":
         return (
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center h-full bg-zinc-950">
-                <div className="text-center text-zinc-500">
-                  <div className="w-8 h-8 border-4 border-zinc-700 border-t-amber-500 rounded-full animate-spin mx-auto mb-3"></div>
-                  <p className="text-sm">Loading PDF Viewer...</p>
-                </div>
-              </div>
-            }
-          >
+          <Suspense fallback={loadingFallback}>
             <PDFViewer />
           </Suspense>
         );
