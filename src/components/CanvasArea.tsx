@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import getStroke from "perfect-freehand";
 import { cn } from "~/utils/merge";
 import {
   Undo2,
@@ -12,6 +11,9 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useChatStore } from "~/store/chatStore";
+
+// Dynamically import perfect-freehand only on client
+let getStroke: any = null;
 
 type Point = [number, number, number];
 
@@ -67,12 +69,22 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [isSendingToAI, setIsSendingToAI] = useState(false);
+  const [isLibraryLoaded, setIsLibraryLoaded] = useState(false);
 
   const svgRef = useRef<SVGSVGElement>(null);
-  const sendStreamingMessage = useChatStore((state) => state.sendStreamingMessage);
+  const sendStreamingMessage = useChatStore(
+    (state) => state.sendStreamingMessage
+  );
 
   useEffect(() => {
     setIsClient(true);
+    // Load perfect-freehand on client
+    if (typeof window !== "undefined") {
+      import("perfect-freehand").then((module) => {
+        getStroke = module.default;
+        setIsLibraryLoaded(true);
+      });
+    }
   }, []);
 
   const getPointFromEvent = useCallback(
@@ -122,6 +134,10 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
   };
 
   const renderStroke = (stroke: Stroke, index: number) => {
+    if (!getStroke) {
+      return null;
+    }
+
     const outlinePoints = getStroke(stroke.points, {
       size: stroke.size,
       thinning: 0.5,
@@ -221,7 +237,7 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
           // Fill background
           ctx.fillStyle = "#09090b"; // zinc-950
           ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
+
           // Draw the SVG
           ctx.drawImage(img, 0, 0);
 
@@ -257,7 +273,7 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
     }
   };
 
-  if (!isClient) {
+  if (!isClient || !isLibraryLoaded) {
     return (
       <div className={cn("flex flex-col h-full bg-zinc-950", className)}>
         <div className="flex items-center justify-center h-full">
@@ -422,7 +438,7 @@ const CanvasArea = ({ className }: CanvasAreaProps) => {
           {strokes.map((stroke, index) => renderStroke(stroke, index))}
 
           {/* Render current stroke being drawn */}
-          {currentStroke.length > 0 && (
+          {currentStroke.length > 0 && getStroke && (
             <path
               d={getSvgPathFromStroke(
                 getStroke(currentStroke, {

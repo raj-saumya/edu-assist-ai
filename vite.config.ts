@@ -20,4 +20,10 @@ export default defineConfig({
     netlify(),
     viteReact(),
   ],
+  ssr: {
+    noExternal: ['perfect-freehand', 'react-pdf', 'pdfjs-dist'],
+  },
+  optimizeDeps: {
+    exclude: ['perfect-freehand'],
+  },
 })
