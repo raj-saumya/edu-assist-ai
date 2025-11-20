@@ -10,12 +10,17 @@ export type Message = {
   timestamp: Date;
 };
 
+export type WorkspaceType = "canvas" | "pdf" | null;
+
 type ChatStore = {
   messages: Message[];
   addMessage: (content: string, type: MessageType) => void;
   updateMessage: (id: string, content: string) => void;
   sendUserMessage: (content: string) => void;
   sendStreamingMessage: (content: string) => void;
+  activeWorkspace: WorkspaceType;
+  toggleWorkspace: (type: WorkspaceType) => void;
+  closeWorkspace: () => void;
   isCanvasOpen: boolean;
   toggleCanvas: () => void;
   setCanvasOpen: (isOpen: boolean) => void;
@@ -142,7 +147,18 @@ export const useChatStore = create<ChatStore>((set) => ({
       }
     );
   },
+  activeWorkspace: null,
+  toggleWorkspace: (type: WorkspaceType) =>
+    set((state) => ({
+      activeWorkspace: state.activeWorkspace === type ? null : type,
+    })),
+  closeWorkspace: () => set({ activeWorkspace: null }),
   isCanvasOpen: false,
-  toggleCanvas: () => set((state) => ({ isCanvasOpen: !state.isCanvasOpen })),
-  setCanvasOpen: (isOpen: boolean) => set({ isCanvasOpen: isOpen }),
+  toggleCanvas: () =>
+    set((state) => ({
+      isCanvasOpen: !state.isCanvasOpen,
+      activeWorkspace: !state.isCanvasOpen ? "canvas" : null,
+    })),
+  setCanvasOpen: (isOpen: boolean) =>
+    set({ isCanvasOpen: isOpen, activeWorkspace: isOpen ? "canvas" : null }),
 }));
